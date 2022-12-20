@@ -1,0 +1,22 @@
+.k-animation-container {
+    z-index: 10003
+}
+.k-dialog-wrapper {
+    z-index: 10003
+}
+.k-form .k-form-field {
+    margin-top: 0.5rem;
+}
+#kt_content {
+    height: calc(100vh - 140px) !important;
+    overflow-y: auto !important;
+}
+
+.vr {
+/*    display: inline-block;
+    align-self: stretch;*/
+    width: 1px;
+    min-height: 1em;
+    background-color: #808080;
+    opacity: .25;
+}
