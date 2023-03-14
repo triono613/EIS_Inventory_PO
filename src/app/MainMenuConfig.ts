@@ -48,25 +48,139 @@ const MainMenuConfig: Array<MenuItemConfig> = [
         privilege: '*',
         children: [
             {
-                id: 'purchase-list',
+                id: 'purchase-list-xx',
                 title: 'Purchase Order',
                 route: '/',
                 privilege: '*',
                 children: [
                     {
-                        id: 'view-purchase',
+                        id: 'view-purchase-nnn',
                         title: 'View Purchase',
                         route: '/purchase',
                         privilege: '*',
                     },
-                    {
-                        id: 'receipt-purchase',
-                        title: 'Receipt Purchase',
-                        route: '/',
-                        privilege: '*',
-                    },
+                   
                 ],
             },
+            {
+                id: 'supplier-return-list',
+                title: 'Supplier Returns',
+                route: '/',
+                privilege: '*',
+                children: [
+                    {
+                        id: 'view-supplier-return',
+                        title: 'View Supplier Return',
+                        route: '/supplier-return',
+                        privilege: '*',
+                    },
+                  
+                ],
+            },
+
+
+        ],
+    },
+    {
+        id: 'inventory',
+        title: 'Inventory',
+        route: '',
+        icon: 'inventory',
+        privilege: '*',
+        children: [
+            {
+                id: 'transaksi',
+                title: 'Transaksi',
+                route: '/transaksi',
+                privilege: '*',
+                children: [
+                    {
+                        id: 'good-receipt',
+                        title: 'GoodsReceipt',
+                        route: '/good-receipt',
+                        privilege: '*',
+                    },
+                    {
+                        id: 'inventory-transfer',
+                        title: 'InventoryTransfers',
+                        route: '/inventory-transfer',
+                        privilege: '*',
+                    },
+                    {
+                        id: 'delivery-order',
+                        title: 'DeliveryOrders',
+                        route: '/delivery-order',
+                        privilege: '*',
+                    },
+                    {
+                        id: 'stock-opname',
+                        title: 'StockOpname',
+                        route: '/stock-opname',
+                        privilege: '*',
+                    },
+                    {
+                        id: 'stock',
+                        title: 'Stock',
+                        route: '/stock',
+                        privilege: '*',
+                    },
+                ]
+            },
+            {
+                id: 'nav-products',
+                title: 'Products',
+                route: '',
+                privilege: '*',
+                children: [
+                    {
+                        id: 'products',
+                        title: 'View Products',
+                        route: '/product',
+                        privilege: '*',
+                    },
+                ]
+            },
+          
+        ],
+    },
+    {
+        id: 'sales',
+        title: 'Sales ',
+        route: '',
+        icon: 'inventory',
+        privilege: '*',
+        children: [
+            {
+                id: 'sales-orders',
+                title: 'Orders',
+                route: '/sales-orders',
+                privilege: '*',
+                children: [
+                    
+                    {
+                        id: 'view-sales-order',
+                        title: 'View Sales Order',
+                        route: '/view-sales-order',
+                        privilege: '*',
+                    },
+                  
+                ]
+            },
+            {
+                id: 'nav-products',
+                title: 'Products',
+                route: '',
+                privilege: '*',
+                children: [
+                    {
+                        id: 'products',
+                        title: 'View Products',
+                        route: '/product',
+                        privilege: '*',
+                    },
+                ]
+            },
+          
         ],
     },
     {
@@ -175,68 +289,7 @@ const MainMenuConfig: Array<MenuItemConfig> = [
             },
         ],
     },
-    {
-        id: 'inventory',
-        title: 'Inventory',
-        route: '',
-        icon: 'inventory',
-        privilege: '*',
-        children: [
-            {
-                id: 'transaksi',
-                title: 'Transaksi',
-                route: '/transaksi',
-                privilege: '*',
-                children: [
-                    {
-                        id: 'good-receipt',
-                        title: 'GoodsReceipt',
-                        route: '/good-receipt',
-                        privilege: '*',
-                    },
-                    {
-                        id: 'inventory-transfer',
-                        title: 'InventoryTransfers',
-                        route: '/inventory-transfer',
-                        privilege: '*',
-                    },
-                    {
-                        id: 'delivery-order',
-                        title: 'DeliveryOrders',
-                        route: '/delivery-order',
-                        privilege: '*',
-                    },
-                    {
-                        id: 'stock-opname',
-                        title: 'StockOpname',
-                        route: '/stock-opname',
-                        privilege: '*',
-                    },
-                    {
-                        id: 'stock',
-                        title: 'Stock',
-                        route: '/stock',
-                        privilege: '*',
-                    },
-                ]
-            },
-            {
-                id: 'nav-products',
-                title: 'Products',
-                route: '',
-                privilege: '*',
-                children: [
-                    {
-                        id: 'products',
-                        title: 'View Products',
-                        route: '/product',
-                        privilege: '*',
-                    },
-                ]
-            },
-          
-        ],
-    },
+
     {
         id: 'administration',
         title: 'Administration',

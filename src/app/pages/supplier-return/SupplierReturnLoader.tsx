@@ -8,21 +8,24 @@ import {
     toDataSourceRequestString,
 } from '@progress/kendo-data-query'
 
-interface PurchaseLoaderProps{
+interface SupplierReturnLoaderProps{
     dataState : State,
+    supplierReturnStatus : string|null,
     searchText : string,
     version: number,
-    onDataReceived : ( product : DataResult) => void
+    onDataReceived : ( supplierReturn : DataResult) => void
 }
 
-export const PurchaseLoader = ( props : PurchaseLoaderProps) => {
-    
+export const SupplierReturnLoader = ( props : SupplierReturnLoaderProps) => {
+    const baseUrl = 'https://demos.telerik.com/kendo-ui/service-v4/odata/SupplierReturns?$count=true&'
+    const init = { method: 'GET', accept: 'application/json', headers: {} }
+
     const lastSuccess = React.useRef<string>('');
     const pending = React.useRef<string>('');
 
     const requestDataIfNeeded = () => {
         let queryString = toDataSourceRequestString(props.dataState);
-        let key = queryString + '|' + props.searchText + '|' + props.version;
+        let key = queryString + '|' + props.supplierReturnStatus + '|' + props.searchText + '|' + props.version;
         if (pending.current || key === lastSuccess.current) {
             console.log('exit')
             return

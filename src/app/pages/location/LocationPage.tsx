@@ -53,7 +53,7 @@ export function LocationPage() {
     const [gridHeight, setGridHeight] = useState(0)
     const [searchText, setSearchText] = useState('')
     const [dataVersion, setDataVersion] = useState(0)
-    const [customerId, setCustomerId] = useState<string | null>(null)
+    const [customerxId, setCustomerxId] = useState<string | null>(null)
 
     const [items, setItems] = React.useState<DataResult>({
         data: [],
@@ -122,7 +122,8 @@ export function LocationPage() {
     }
 
     function onCustomerChange(value: string | null) {
-        setCustomerId(value)
+        setCustomerxId(value)
+        console.log('valuex= ',value)
     }
 
     function reloadGrid() {
@@ -242,7 +243,10 @@ export function LocationPage() {
                             <span>Customer</span>
                         </div>
                         <div className='ms-4'>
-                            <SelectCustomer onChange={onCustomerChange} />
+                            <SelectCustomer onChange={function (value: string | null): void {
+                                throw new Error('Function not implemented.')
+                            } }                            // onChange={onCustomerChange} 
+                            />
                             {/* <MultiColumnComboBox
                                 data={customers}
                                 columns={customerColumns}
@@ -296,13 +300,13 @@ export function LocationPage() {
                     ) : (
                         <React.Fragment></React.Fragment>
                     )}
-                    <LocationLoader
+                    {/* <LocationLoader
                         dataState={dataState}
                         onDataReceived={dataReceived}
                         searchText={searchText}
                         customerId={customerId}
                         version={dataVersion}
-                    />
+                    /> */}
                 </div>
                 {editState.visible && (
                     <LocationForm

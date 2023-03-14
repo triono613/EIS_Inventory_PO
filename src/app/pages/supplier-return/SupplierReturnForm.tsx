@@ -16,7 +16,7 @@ import { Product } from '../../interfaces/Product'
 import * as Yup from 'yup';
 
 import { useForm } from "react-hook-form";
-import { dataLoaded } from './PurchaseSlice';
+import { dataLoaded } from './SupplierReturnSlice';
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import { HookFormTextArea } from "../../shared/components/ReactHookForm/HookFormTextArea";
@@ -31,16 +31,15 @@ import { PageContainer } from "../../layout/components/PageContainer";
 import { PageTitle } from '../../../_metronic/layout/core'
 import { Toolbar } from '../../layout/components/Toolbar'
 import { MultiColumnComboBox } from "@progress/kendo-react-dropdowns";
+import { SupplierReturn } from "../../interfaces/SupplierReturn";
 import { Supplier } from "../../interfaces/Supplier";
-import { PoItem } from "./po-item/PoItem";
-
 
 interface SelectSupplierProps {
     value?: string | null
     // onChange: (value: string | null) => void
 }
 
-export function PurchaseForm(props: SelectSupplierProps) {
+export function SupplierReturnForm(props: SelectSupplierProps) {
     const { t } = useTranslation('translation')
     const dispatch = useDispatch()
     const productState = useSelector((state: RootState) => state.product);
@@ -80,7 +79,7 @@ export function PurchaseForm(props: SelectSupplierProps) {
   })
 
 
-  const initialFormData: Product = {
+  const initialFormData: SupplierReturn = {
     inventory_item_id : '0',
     inventory_item_name: '',
     inventory_group_id: '0',
@@ -340,31 +339,11 @@ return (
                             label={t('DeliveryDate')}
                         //rules={{ required: t('DataIsRequired', { data: t('UserName') }) }}
                         />
-            </fieldset>     
+            </fieldset>
+      
               </div>
-                
-                <br />
-<hr  />
-                <div>
-                <ul className="nav nav-tabs nav-line-tabs nav-line-tabs-2x mb-5 fs-6">
-                    <li className="nav-item">
-                    <a className="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_4">Order Lines</a>
-                    </li>
-                </ul>
-                <div className="tab-content" id="myTabContent">
-                    <div className="tab-pane fade show active" id="kt_tab_pane_4" role="tabpanel">
-                    <PoItem />
-                    </div>
-                
-                </div>
-                </div>
 
-
-
-
-
-
-
+              
           </form>
       </div>
   </div>

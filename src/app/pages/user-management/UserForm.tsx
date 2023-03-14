@@ -118,6 +118,9 @@ function UserForm(props: IUserFormProps) {
         }
     }, [mode])
 
+
+console.log('onClose= ',onClose)
+    
     function loadData() {
         setFormState('loading')
         let url = `api/user/${dataId}`

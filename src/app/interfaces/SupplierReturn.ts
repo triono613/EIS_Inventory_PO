@@ -1,4 +1,4 @@
-export interface Purchase {
+export interface SupplierReturn {
   
     inventory_item_id: string,
     inventory_item_name: string,

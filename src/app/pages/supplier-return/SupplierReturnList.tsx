@@ -24,13 +24,13 @@ import { Toolbar } from '../../layout/components/Toolbar'
 import { PageContainer } from '../../layout/components/PageContainer'
 import { ShowDeleteConfirmation } from '../../shared/components/AppDialog/AppDialog'
 import toast from 'react-hot-toast'
-import { Product } from '../../interfaces/Product'
-import { PurchaseLoader } from './PurchaseLoader'
+import { SupplierReturn } from '../../interfaces/SupplierReturn'
+import { SupplierReturnLoader } from './SupplierReturnLoader'
 import { Link, useHistory } from 'react-router-dom'
 
 library.add(faEdit, faTrash)
 
-export function PurchaseList() {
+export function SupplierReturnList() {
     const { t } = useTranslation('translation')
     const dispatch = useDispatch()
     const history = useHistory();
@@ -50,7 +50,7 @@ export function PurchaseList() {
     const initialEditState = {
         visible: false,
         mode: '',
-        title: 'Add Purchase',
+        title: 'Add SupplierReturn',
         dataId: '',
     }
 
@@ -91,15 +91,15 @@ export function PurchaseList() {
         setDataVersion(dataVersion + 1)
     }
 
-    function registerPurchase() {
-        history.push('/purchase/new')
+    function registerSupplierReturn() {
+        history.push('/supplier-return/new')
     }
 
     function handleFormClose() {
         setEditState({ ...editState, visible: false })
     }
 
-    function handleFormSuccess(data: Product) {
+    function handleFormSuccess(data: SupplierReturn) {
         setEditState({ ...editState, visible: false })
         reloadGrid()
         let message = ''
@@ -112,16 +112,16 @@ export function PurchaseList() {
     }
 
     function handleEditButtonClick(data: any) {
-        history.push(`Product/${data.inventory_item_id}`)
+        history.push(`SupplierReturn/${data.inventory_item_id}`)
     }
 
-    function handleDeleteButtonClick(data: Product) {
-        ShowDeleteConfirmation(dispatch, t, t('Products'), data.inventory_item_name, () => {
+    function handleDeleteButtonClick(data: SupplierReturn) {
+        ShowDeleteConfirmation(dispatch, t, ('SupplierReturns'), data.inventory_item_name, () => {
             handleDeleteConfirm(data)
         })
     }
 
-    function handleDeleteConfirm(data: Product) {
+    function handleDeleteConfirm(data: SupplierReturn) {
         dispatch(closeDialog(null))
         let loadingMsg = t('DeletingData', { data: data.inventory_item_name })
         let successMsg = t('DataHasBeenDeleted', { data: data.inventory_item_name })
@@ -135,7 +135,7 @@ export function PurchaseList() {
         })
     }
 
-    function submitDeletePromise(data: Product) {
+    function submitDeletePromise(data: SupplierReturn) {
         let url = `api/inventoryItem/delete/${data.inventory_item_id}`
         // use delay to show deleting animation..
         const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
@@ -145,28 +145,28 @@ export function PurchaseList() {
     }
 
     const toolbar = (
-        <Button primary={true} onClick={registerPurchase} togglable={false}>
-            {t('Add')} {t('Purchase')}
+        <Button primary={true} onClick={registerSupplierReturn} togglable={false}>
+            {t('Add')} {('SupplierReturns')}
         </Button>
     )
 
  
 
 
-    const ProductNameCell = (props: GridCellProps) => {
+    const SupplierReturnNameCell = (props: GridCellProps) => {
         let url = '/InventoryItem/' + props.dataItem.id;
         return (
             <td width='250px'>
-                <Link to={url}>{props.dataItem.Product_name}</Link>
+                <Link to={url}>{props.dataItem.SupplierReturn_name}</Link>
             </td>
      
         )
     }
 
-    const ProductCodeCell = (props: GridCellProps) => {
+    const SupplierReturnCodeCell = (props: GridCellProps) => {
         let url = '/InventoryItem/' + props.dataItem.id;
         return (
-            <td width='200px'><Link to={url}>{props.dataItem.Product_code}</Link></td>
+            <td width='200px'><Link to={url}>{props.dataItem.SupplierReturn_code}</Link></td>
         )
     }
 
@@ -192,68 +192,70 @@ export function PurchaseList() {
     }
 
     return (
+
+        
         <PageContainer>
-            <PageTitle breadcrumbs={[]}>{t('Purchase')}</PageTitle>
-            <Toolbar toolbar={toolbar}></Toolbar>
-            <ContentContainer>
-                <div className='d-flex align-items-center flex-wrap justify-content-between mt-2 mb-2 w-100'>
-                    {/* <!-- left aligned controllers --> */}
-                    <div className='d-flex align-items-center mb-3'>
-                    <SearchTextBox onChange={onSearchTextChange}></SearchTextBox>
-                    </div>
-                  
+        <PageTitle breadcrumbs={[]}>{('Supplier Return')}</PageTitle>
+        <Toolbar toolbar={toolbar}></Toolbar>
+        <ContentContainer>
+            <div className='d-flex align-items-center flex-wrap justify-content-between mt-2 mb-2 w-100'>
+                {/* <!-- left aligned controllers --> */}
+                <div className='d-flex align-items-center mb-3'>
+                <SearchTextBox onChange={onSearchTextChange}></SearchTextBox>
                 </div>
-                <div id='gridContainer' className='w-100 h-100'>
-                    {gridHeight > 0 ? (
-                        <Grid
-                            filterable={false}
-                            sortable={true}
-                            pageable={true}
-                            scrollable='scrollable'
-                            {...dataState}
-                            data={items}
-                            onDataStateChange={onGridStateChange}
-                            style={{ height: `${gridHeight}px` }}
-                        >
-                            {/* <GridColumn field='inventory_group_id' title={t('InventoryGroupId')}  width='150px'  /> */}
-                            <GridColumn field='' title={ t('OrderNo')} width='150px' />
-                            <GridColumn field='' title={t('OrderDate')} filter="date" width='100px' />
-                            <GridColumn field='' title={t('DeliveryDate')} filter="date" width="100px" />
-                            <GridColumn field='' title={t('SupplierName')} width='150px' />
-                            <GridColumn field='' title={ t('SuppliersReferenced')} width="150px" />
-                            <GridColumn field='' title={ t('Status')} width="90px" />
-                            <GridColumn field='' title={ t('Warehouse')} width="100px" />
-                            <GridColumn field='' title={ t('SupplierCurrency')} width="70px" />
-                      
-                            <GridColumn
-                                    field='inventory_item_id'
-                                    title={t('Menu')}
-                                    width='120px'
-                                    cell={actionCell}
-                                    className='text-center'
-                                    headerClassName='text-center'
-                                />
-                        </Grid>
-                    ) : (
-                        <React.Fragment></React.Fragment>
-                    )}
-                     <PurchaseLoader
+              
+            </div>
+            <div id='gridContainer' className='w-100 h-100'>
+                {gridHeight > 0 ? (
+                    <Grid
+                        filterable={false}
+                        sortable={true}
+                        pageable={true}
+                        scrollable='scrollable'
+                        {...dataState}
+                        data={items}
+                        onDataStateChange={onGridStateChange}
+                        style={{ height: `${gridHeight}px` }}
+                    >
+                        {/* <GridColumn field='inventory_group_id' title={t('InventoryGroupId')}  width='150px'  /> */}
+                        <GridColumn field='' title={ t('OrderNo')} width='150px' />
+                        <GridColumn field='' title={t('OrderDate')} filter="date" width='100px' />
+                        <GridColumn field='' title={t('DeliveryDate')} filter="date" width="100px" />
+                        <GridColumn field='' title={t('SupplierName')} width='150px' />
+                        <GridColumn field='' title={ t('SuppliersReferenced')} width="150px" />
+                        <GridColumn field='' title={ t('Status')} width="90px" />
+                        <GridColumn field='' title={ t('Warehouse')} width="100px" />
+                        <GridColumn field='' title={ t('SupplierCurrency')} width="70px" />
+                  
+                        <GridColumn
+                                field='inventory_item_id'
+                                title={t('Menu')}
+                                width='120px'
+                                cell={actionCell}
+                                className='text-center'
+                                headerClassName='text-center'
+                            />
+                    </Grid>
+                ) : (
+                    <React.Fragment></React.Fragment>
+                )}
+                 <SupplierReturnLoader
                         dataState={dataState}
                         onDataReceived={dataReceived}
                         searchText={searchText}
-                        version={dataVersion}              
-                         /> 
-                </div>
-                {/* {editState.visible && (
-                    <CustomerForm
-                        title={editState.title}
-                        mode={editState.mode}
-                        dataId={editState.dataId}
-                        onClose={handleFormClose}
-                        onSuccess={handleFormSuccess}
-                    />
-                )} */}
-            </ContentContainer>
-        </PageContainer>
-    )
+                        version={dataVersion} supplierReturnStatus={null}                     /> 
+            </div>
+            {/* {editState.visible && (
+                <CustomerForm
+                    title={editState.title}
+                    mode={editState.mode}
+                    dataId={editState.dataId}
+                    onClose={handleFormClose}
+                    onSuccess={handleFormSuccess}
+                />
+            )} */}
+        </ContentContainer>
+    </PageContainer>
+)
+    
 }

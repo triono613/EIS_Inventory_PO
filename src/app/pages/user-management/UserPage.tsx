@@ -108,7 +108,10 @@ export function UserPage() {
     }
 
     function handleFormClose() {
-        setEditState({...editState, visible: false})
+        setEditState({
+            ...editState, 
+            visible: false
+        })
     }
 
     function handleFormSuccess(data: any) {

@@ -217,6 +217,7 @@ const locale = {
     NormalizedName: 'Description',
     RoleType: 'Role Type',
 
+    SuppliersReferenced: 'Suppliers References',
     ViewSuppliers: 'View Supplier',
     Suppliers: 'Supplier',
     SupplierName: 'Supplier Name',
@@ -243,6 +244,7 @@ const locale = {
     PaymentTermsId : 'Payment Terms Id',
     IDR : 'IDR',
     USD : 'USD',
+    EUR : 'EUR',
 
     FinancialDetail : 'Financial Detail',
     SupplierAddress : 'Address',
@@ -256,6 +258,21 @@ const locale = {
     InventoryGroupName : 'Inventory Group Name',
     InventoryMinStock : 'Inventory Min Stock',
     InventoryItemSku : 'Inventory Item SKU',
+
+    No : 'No',
+    OrderNo : 'Order No',
+    DeliveryDate : 'Delivery Date',
+    Delivery : 'Delivery',
+    OrderDate : 'Order Date',
+    Reference : 'Reference',
+    Warehouse : 'Warehouse',
+    Total : 'Total',
+    Purchase : 'Purchase',
+    ViewPurchase : 'View Purchase',
+
+    refNumber : 'Ref Number',
+    poDate : 'PO Date',
+    PurchaseDate : ' Purchase Date'
 
 }
 

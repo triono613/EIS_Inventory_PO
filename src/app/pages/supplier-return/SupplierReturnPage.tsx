@@ -3,22 +3,22 @@ import { Redirect, useParams } from "react-router";
 import { PageTitle } from '../../../_metronic/layout/core'
 import { Toolbar } from "../../layout/components/Toolbar";
 import { useEffect, useState } from "react";
-import { Purchase } from "../../interfaces/Purchases";
+// import { SupplierReturn } from "../../interfaces/SupplierReturn";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../setup";
-import { loadData, dataLoading, newData } from "./PurchaseSlice";
+import { loadData, dataLoading, newData } from "./SupplierReturnSlice";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
-import { PurchaseForm } from "./PurchaseForm"
+import { SupplierReturnForm } from "./SupplierReturnForm"
 
-export type purchasePageParams = {
+export type supplierReturnPageParams = {
     id: string
 }
 
-export function PurchasePage() {
+export function SupplierReturnPage() {
     const { t } = useTranslation('translation')
-    const params: purchasePageParams = useParams();
+    const params: supplierReturnPageParams = useParams();
     const dispatch = useDispatch()
-    const purchaseState = useSelector((state: RootState) => state.purchase);
+    const supplierReturnState = useSelector((state: RootState) => state.supplierReturn);
     const [state, setState] = useState<string>('init')
     const location = useLocation()
  
@@ -45,14 +45,14 @@ export function PurchasePage() {
   
 
     function pageTitle() {
-        if (purchaseState.state === 'loading') return '';
-        else if (purchaseState.state === 'loaded') return purchaseState.data?.inventory_item_name;
-        else if (purchaseState.state === 'new') return 'Add Purchase Order'
+        if (supplierReturnState.state === 'loading') return '';
+        else if (supplierReturnState.state === 'loaded') return supplierReturnState.data?.inventory_item_name;
+        else if (supplierReturnState.state === 'new') return 'Tambah SupplierReturn'
         else return '';
     }
 
     function titleBadge() {
-        if (purchaseState.state === 'new') {
+        if (supplierReturnState.state === 'new') {
             return null;
         }
         else {
@@ -65,14 +65,14 @@ export function PurchasePage() {
 
 
     var contentHeight = 'calc(100% - 55px)';
-    if (purchaseState.state === 'new') {
+    if (supplierReturnState.state === 'new') {
         contentHeight = 'calc(100%)';
     }
     return (
         <div className='h-100 w-100 d-flex flex-column'>
             <PageTitle breadcrumbs={[{
-                title: t('Purchase'),
-                path: '/purchase',
+                title: ('SupplierReturns'),
+                path: '/supplierReturn',
                 isActive: true,
                 isSeparator: false
             }]} description='Active' >
@@ -89,9 +89,9 @@ export function PurchasePage() {
                             <Link
                                 className={
                                     `nav-link text-active-primary me-6 ` +
-                                    (location.pathname === `/purchase/` && 'active')
+                                    (location.pathname === `/supplier-return/` && 'active')
                                 }
-                                to={`/purchase/`}
+                                to={`/supplier-return/`}
                             >
                                 {/* {('Tab-1')} */}
                             </Link>
@@ -106,12 +106,11 @@ export function PurchasePage() {
         <div style={{ height: contentHeight, overflowY: "auto" }}>
                 <Switch>
                         <>
-                            {/* <Route exact path={'/purchase/new'}> */}
-                            <Route exact path={'/purchase/:id'}>
-                                <PurchaseForm />
+                            <Route exact path={'/supplier-return/:id'}>
+                                <SupplierReturnForm />
                             </Route>
                         </>
-                    <Redirect to={`/purchase/${params.id}`} />
+                    <Redirect to={`/supplierReturn/${params.id}`} />
                 </Switch>
             </div>
             

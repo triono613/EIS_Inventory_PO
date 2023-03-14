@@ -28,6 +28,9 @@ import { ProductList } from '../pages/product/ProductList'
 import { PurchasePage } from '../pages/purchase/PurchasePage'
 import { PurchaseList } from '../pages/purchase/PurchaseList'
 
+import { SupplierReturnPage } from '../pages/supplier-return/SupplierReturnPage'
+import { SupplierReturnList } from '../pages/supplier-return/SupplierReturnList'
+
 export function PrivateRoutes() {
     const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
     const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
@@ -48,6 +51,8 @@ export function PrivateRoutes() {
                 <Route path='/product/:id' component={ProductPage} />
                 <Route exact path='/purchase' component={PurchaseList} />
                 <Route path='/purchase/:id' component={PurchasePage} />
+                <Route exact path='/supplier-return' component={SupplierReturnList} />
+                <Route path='/supplier-return/:id' component={SupplierReturnPage} />
 
                 <Route path='/builder' component={BuilderPageWrapper} />
                 <Route path='/crafted/pages/profile' component={ProfilePage} />

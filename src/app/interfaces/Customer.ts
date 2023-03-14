@@ -3,5 +3,6 @@ export interface Customer {
     customer_code: string,
     customer_name: string,
     customer_address: string,
-    phone_number: string
+    phone_number: string,
+    xero_contact_id : string
 }

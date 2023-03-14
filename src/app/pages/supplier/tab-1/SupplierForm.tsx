@@ -151,7 +151,7 @@ function doRegister(data: Supplier) {
                 //if (onSuccess) onSuccess(data, response.data.result)
                 let message = t('DataHasBeenCreated', { data: newData.supplier_name })
                 toast.success(message)
-                history.push('/supplier')
+                history.push('/shipment-monitoring')
             } else {
                 setFormState('editing')
                 setErrorMessage(response.data.errorMessage)
@@ -176,7 +176,7 @@ function onCancelClicked() {
     console.log('supplierState.state= ', supplierState.state);
 
   if (supplierState.state === 'new' || supplierState.state === 'loaded') {
-      // back to member page
+      // back to supplierlist page
       history.push('/supplier')
   }
   else {
@@ -190,6 +190,7 @@ function onCancelClicked() {
 const CURR = [
         { id: 'IDR', text: t('IDR') },
         { id: 'USD', text: t('USD') },
+        { id: 'EUR', text: t('EUR') }
     ]
 
 
